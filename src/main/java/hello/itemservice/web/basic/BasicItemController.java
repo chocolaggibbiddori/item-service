@@ -41,9 +41,13 @@ public class BasicItemController {
     }
 
     @PostMapping("/add")
-    public String save() {
+    public String addItemV1(@RequestParam String itemName, @RequestParam int price, @RequestParam int quantity, Model model) {
+        Item item = new Item(itemName, price, quantity);
 
-        return "basic/addForm";
+        itemRepository.save(item);
+        model.addAttribute("item", item);
+
+        return "basic/item";
     }
 
     /**
